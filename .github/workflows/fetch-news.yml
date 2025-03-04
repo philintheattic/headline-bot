@@ -21,13 +21,12 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run script
-        run: python headline-bot.py
-
       - name: Commit and push changes
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add headlines.txt
           git commit -m "Updated headlines" || echo "No changes to commit"
-          git push
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
