@@ -1,32 +1,46 @@
-name: Fetch News Headline
+name: Fetch News Headlines
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Runs daily at 8 AM UTC
-  workflow_dispatch:  # Allows manual runs
+    # Run every hour
+    - cron: '0 * * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
-  fetch_news:
+  fetch-headlines:
     runs-on: ubuntu-latest
-
+    
+    permissions:
+      # Important: give the workflow permission to push changes
+      contents: write
+    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests  # Add any other dependencies your script needs
+    
+    - name: Run headline fetching script
+      run: python headline-bot.py
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Install dependencies
-        run: pip install requests
-
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add headlines.txt
-          git commit -m "Updated headlines" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Commit and push changes
+      env:
+        # Use the built-in GitHub token
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add headlines.txt
+        git commit -m "Update headlines $(date +'%Y-%m-%d %H:%M:%S')" || exit 0
+        git push
