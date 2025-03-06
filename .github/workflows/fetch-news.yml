@@ -31,7 +31,7 @@ jobs:
         pip install requests  # Add any other dependencies your script needs
     
     - name: Run headline fetching script
-      run: python headline-bot.py
+      run: python fetch-news.py
 
     
     - name: Commit and push changes
