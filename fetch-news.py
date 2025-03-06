@@ -10,6 +10,6 @@ def get_headline(index=0):
     
 # append current headline to file
 with open("headlines.txt", "a") as file:
-    file.write(get_headline() + "\n")
+    file.write(get_headline().strip("+") + "\n")
 
 print("Headline appended!")
