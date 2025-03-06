@@ -42,4 +42,4 @@ def generate_poem(input_file="headlines.txt", length=5, flags=KEEP_CASE):
 
 
 if __name__ == "__main__":
-    print(generate_poem("headlines.txt", 5, UPPERCASE))
+    generate_poem()
