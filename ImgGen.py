@@ -128,4 +128,4 @@ def put_text_on_image(words_list, output_path, background_color=(255, 255, 255),
 if __name__ == "__main__":
     # Example Usage
     # put_text_on_image(words, "text_on_image.png")
-
+    pass
