@@ -36,7 +36,8 @@ def generate_poem(input_file="headlines.txt", length=5, flags=KEEP_CASE):
     if length > len(poem):
         print(f"Length parameter exceeded limit. Max length of {len(poem)} was used instead.")
 
-    return " ".join(poem[:length])
+    # return " ".join(poem[:length])
+    return " ".join(random.sample(poem, length))
 
 
 

@@ -1,0 +1,46 @@
+name: Generate daily image
+
+on:
+  schedule:
+    # Run every hour
+    - cron: '0 0 * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  fetch-headlines:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      # Important: give the workflow permission to push changes
+      contents: write
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pillow
+    
+    - name: Run combining script
+      run: python combine.py
+
+    
+    - name: Commit and push changes
+      env:
+        # Use the built-in GitHub token
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "added generated image $(date +'%Y-%m-%d')" || exit 0
+        git push

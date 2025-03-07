@@ -25,9 +25,9 @@ def generate_image(hexcode, width=1080, height=1080):
     return Image.new('RGB', (width, height), color=hexcode)
 
 
-def save_image(image, output_dir, index, hexcode):
+def save_image(image, output_dir, index):
     # Save generated image to output directory with organized filenames
-    filename = os.path.join(output_dir, f"{index:0>4}-{hexcode}.png")
+    filename = os.path.join(output_dir, f"{index:0>4}.png")
     try:
         image.save(filename)
     except Exception as e:
@@ -43,7 +43,7 @@ def start_image_generator(input_file="headlines.txt", output_dir="generated_imag
 
     for index, hexcode in enumerate(hexcodes):
         image = generate_image(hexcode)
-        save_image(image, output_dir, index, hexcode)
+        save_image(image, output_dir, index)
 
 
 if __name__ == "__main__":
