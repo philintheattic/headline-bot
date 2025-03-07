@@ -49,6 +49,12 @@ def save_image(image, output_dir, index):
     except Exception as e:
         print(f"Error saving image {filename}: {e}")
 
+def generate_color_img():
+    hexcodes = extract_list_of_hexcodes_from_file("headlines.txt")
+    for i, hexcode in enumerate(hexcodes):
+        image = generate_image(hexcode)
+        save_image(image, "gummybear", i)
+
 
 def put_text_on_image(words_list, output_path, background_color=(255, 255, 255), text_color=(0, 0, 0), margin_percent=10):
     """
@@ -128,4 +134,5 @@ def put_text_on_image(words_list, output_path, background_color=(255, 255, 255),
 if __name__ == "__main__":
     # Example Usage
     # put_text_on_image(words, "text_on_image.png")
+    # generate_color_img()
     pass

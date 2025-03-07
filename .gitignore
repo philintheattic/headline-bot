@@ -1,4 +1,6 @@
 # combined_images/
 __pycache__/
 generated_images/
+gummybear/
 claude_combine.py
+ideen.txt
