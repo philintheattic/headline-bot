@@ -1,4 +1,4 @@
-import image_generator
+import ImgGen
 from TextGen import *
 from PIL import Image, ImageDraw, ImageFont
 from datetime import date
@@ -7,8 +7,8 @@ import os
 
 
 # Image part
-chars = image_generator.extract_valid_chars("headlines.txt")
-hexcodes = image_generator.convert_to_hexcodes(chars)
+chars = ImgGen.extract_valid_chars("headlines.txt")
+hexcodes = ImgGen.convert_to_hexcodes(chars)
 
 # Text part
 text = generate_poem("headlines.txt", 5, LOWERCASE)
