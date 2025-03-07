@@ -9,7 +9,5 @@ def get_headline(index=0):
         return ("Index does not exist. Try a smaller number.")
     
 # append current headline to file
-with open("headlines.txt", "a") as file:
+with open("headlines.txt", "a", encoding="utf-8") as file:
     file.write(get_headline().strip("+") + "\n")
-
-print("Headline appended!")

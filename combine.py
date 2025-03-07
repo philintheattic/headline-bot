@@ -1,5 +1,5 @@
 import image_generator
-from text_generator import *
+from TextGen import *
 from PIL import Image, ImageDraw, ImageFont
 from datetime import date
 import random
