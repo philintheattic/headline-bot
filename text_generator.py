@@ -12,7 +12,8 @@ def generate_poem(input_file="headlines.txt", length=5, flags=KEEP_CASE):
         with open(input_file, encoding="utf-8") as file:
             poem = []
             for line in file:
-                words = line.strip().split(" ")
+                # words = line.strip().split(" ")
+                words = re.findall(r"[a-zA-ZäöüÄÖÜ]+", line)
                 selection = random.choice(words).strip("+?:")
                 # print(selection)
                 # Apply text transformations if flag is set
