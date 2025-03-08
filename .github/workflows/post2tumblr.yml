@@ -39,10 +39,10 @@ jobs:
     - name: create .env file
       run: |
         touch .env
-        echo API_KEY: ${{ secrets.API_KEY }} >> .env
-        echo SECRET_KEY: ${{ secrets.SECRET_KEY }} >> .env
-        echo OAUTH_TOKEN: ${{ secrets.OAUTH_TOKEN }} >> .env
-        echo OAUTH_SECRET: ${{ secrets.OAUTH_SECRET }} >> .env
+        echo "API_KEY = ${{ secrets.API_KEY }}" >> .env
+        echo "SECRET_KEY = ${{ secrets.SECRET_KEY }}" >> .env
+        echo "OAUTH_TOKEN = ${{ secrets.OAUTH_TOKEN }}" >> .env
+        echo "OAUTH_SECRET= ${{ secrets.OAUTH_SECRET }}" >> .env
     
     - name: Run posting script
       run: python tumblr_post.py
