@@ -11,11 +11,6 @@ on:
 jobs:
   post-to-tumblr:
     runs-on: ubuntu-latest
-    env:
-      API_KEY: ${{ secrets.API_KEY }}
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      OAUTH_TOKEN: ${{ secrets.OAUTH_TOKEN }}
-      OAUTH_SECRET: ${{ secrets.OAUTH_SECRET }}
   
     permissions:
       # Important: give the workflow permission to push changes
@@ -39,10 +34,7 @@ jobs:
     - name: create .env file
       run: |
         touch .env
-        echo "API_KEY = ${{ secrets.API_KEY }}" >> .env
-        echo "SECRET_KEY = ${{ secrets.SECRET_KEY }}" >> .env
-        echo "OAUTH_TOKEN = ${{ secrets.OAUTH_TOKEN }}" >> .env
-        echo "OAUTH_SECRET= ${{ secrets.OAUTH_SECRET }}" >> .env
+        echo "${{secrets.TUMBLR_SECRETS}}" >> .env
     
     - name: Run posting script
       run: python tumblr_post.py
