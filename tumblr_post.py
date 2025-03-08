@@ -14,10 +14,10 @@ print(output_path)
 
 # Environment variables
 load_dotenv()
-API_KEY = os.environ["API_KEY"]
-SECRET_KEY = os.environ["SECRET_KEY"]
-OAUTH_TOKEN = os.environ["OAUTH_TOKEN"]
-OAUTH_SECRET = os.environ["OAUTH_SECRET"]
+API_KEY = os.getenv("API_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY")
+OAUTH_TOKEN = os.getenv("OAUTH_TOKEN")
+OAUTH_SECRET = os.getenv("OAUTH_SECRET")
 
 ### TUMBLR API STUFF ###
 

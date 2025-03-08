@@ -33,10 +33,10 @@ jobs:
     
     - name: Run posting script
       env:
-        API_KEY: ${{ secrets.API_KEY}}
-        SECRET_KEY: ${{ secrets.SECRET_KEY}}
-        OAUTH_TOKEN: ${{ secrets.OAUTH_TOKEN}}
-        OAUTH_SECRET: ${{ secrets.OAUTH_SECRET}}
+        API_KEY: ${{ secrets.API_KEY }}
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        OAUTH_TOKEN: ${{ secrets.OAUTH_TOKEN }}
+        OAUTH_SECRET: ${{ secrets.OAUTH_SECRET }}
       run: python tumblr_post.py
 
     
