@@ -1,8 +1,9 @@
 import TextGen
 import ImgGen
+from datetime import date
 
 input_file = "headlines.txt"
-output_path = "combined_images/test.png"
+output_path = f"ready2post/post-{date.today()}.png"
 
 # Generate Poem from File
 text = TextGen.import_file_as_list("headlines.txt")
@@ -14,7 +15,7 @@ poem = TextGen.generate_poem(text, 20, TextGen.LOWERCASE)
 
 # Get Colors from file
 hexcodes = ImgGen.extract_list_of_hexcodes_from_file("headlines.txt")
-print(hexcodes)
+
 
 # Combine both and create image
 ImgGen.put_text_on_image(poem, output_path, background_color=ImgGen.get_random_color(hexcodes))

@@ -2,14 +2,14 @@ name: Generate daily image
 
 on:
   schedule:
-    # Run every hour
+    # Run every 24 hours
     - cron: '0 0 * * *'
   
   # Allow manual trigger
   workflow_dispatch:
 
 jobs:
-  fetch-headlines:
+  generate-post:
     runs-on: ubuntu-latest
     
     permissions:
@@ -30,7 +30,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pillow
     
-    - name: Run combining script
+    - name: Run generating script
       run: python app.py
 
     
