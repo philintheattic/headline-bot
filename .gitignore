@@ -4,3 +4,4 @@ generated_images/
 gummybear/
 claude_combine.py
 ideen.txt
+.env
