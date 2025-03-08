@@ -38,4 +38,8 @@ client = pytumblr.TumblrRestClient(
 
 client.create_photo(blog_name, state="published", tags=taglist, data=output_path)
 
+
+# move image into different folder after posting
+# Make sure that directory exists
+os.makedirs("posted", exist_ok=True)
 os.rename(output_path, f"posted/post-{date.today()}.png")
