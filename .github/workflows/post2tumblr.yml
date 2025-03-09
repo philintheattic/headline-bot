@@ -3,7 +3,7 @@ name: Post image to tumblr
 on:
   schedule:
     # Run every 24 hours
-    - cron: '0 18 * * *'
+    - cron: '0 12 * * *'
   
   # Allow manual trigger
   workflow_dispatch:
