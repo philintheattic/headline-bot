@@ -97,7 +97,7 @@ def put_text_on_image(words_list, output_path, background_color=(255, 255, 255),
         lines = wrapped_text.split('\n')
         
         # Calculate total text height
-        line_height = font.getbbox("A")[3] + 10  # Add some line spacing
+        line_height = font.getbbox("A")[3] + 40  # Add some line spacing
         total_text_height = line_height * len(lines)
         
         # Check if text fits within the text area
@@ -133,6 +133,6 @@ def put_text_on_image(words_list, output_path, background_color=(255, 255, 255),
 
 if __name__ == "__main__":
     # Example Usage
-    # put_text_on_image(words, "text_on_image.png")
+    # put_text_on_image(["test", "test", "test", "zu fuß gehen", "weggehen", "Öffentlicher Personennahverkehr", "test", "test", "test", ], "text_on_image.png")
     # generate_color_img()
     pass
