@@ -39,8 +39,16 @@ def remove_all_symbols(input_list):
     for line in input_list:
         corpus.extend(re.findall(r"\w+", line, re.IGNORECASE))
     return corpus
-    
 
+
+# Filter out numbers in case the font doesn't support number characters
+def remove_all_digits(input_list):
+    corpus = []
+    for line in input_list:
+        corpus.extend(re.findall(r"[a-zäüöß]+", line, re.IGNORECASE))
+    return corpus
+
+    
 # Filter out short words or single letters
 def remove_short_words(input_list, maxlength=2):
     return list(filter(lambda word: len(word) > maxlength, input_list ))
@@ -68,7 +76,10 @@ def generate_poem(input_list, length=5, flags=KEEP_CASE):
             word = word.capitalize()
         output_list.append(word)
         
-    return random.sample(output_list, length)
+    try:
+        return random.sample(output_list, length)
+    except ValueError:
+        return random.sample(output_list, 1)
     
 
 

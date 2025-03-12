@@ -21,6 +21,7 @@ output_path = os.path.join(output_dir, output_file)
 # Generate Poem from File
 text = TextGen.import_file_as_list(input_file)
 text = TextGen.remove_all_symbols(text)
+text = TextGen.remove_all_digits(text)
 text = TextGen.remove_short_words(text, MINIUM_WORD_LENGTH-1)
 text = TextGen.remove_prepositions(text)
 text = TextGen.remove_duplicates(text)
@@ -31,3 +32,6 @@ hexcodes = ImgGen.extract_list_of_hexcodes_from_file(input_file)
 
 # Combine both and create image
 ImgGen.put_text_on_image(poem, output_path, background_color=ImgGen.get_random_color(hexcodes))
+
+# Testing purposes
+# ImgGen.put_text_on_image(poem, "test_images/digits_test.png", background_color=ImgGen.get_random_color(hexcodes))

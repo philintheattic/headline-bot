@@ -133,6 +133,6 @@ def put_text_on_image(words_list, output_path, background_color=(255, 255, 255),
 
 if __name__ == "__main__":
     # Example Usage
-    # put_text_on_image(["test", "test", "test", "zu fuß gehen", "weggehen", "Öffentlicher Personennahverkehr", "test", "test", "test", ], "text_on_image.png")
+    # put_text_on_image(["ä", "ö", "ü", "100", "weggehen", "Öffentlicher Personennahverkehr", "test", "test", "test", ], "test_images/umlaute.png")
     # generate_color_img()
     pass
