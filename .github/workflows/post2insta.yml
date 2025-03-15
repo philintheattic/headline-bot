@@ -1,0 +1,53 @@
+name: Post image to instagram
+
+on:
+  schedule:
+    # Run every 24 hours
+    - cron: '0 6 * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  post-to-instagram:
+    runs-on: ubuntu-latest
+  
+    permissions:
+      # Important: give the workflow permission to push changes
+      contents: write
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install instagrapi
+        pip install python-dotenv
+
+    - name: create .env file
+      run: |
+        touch .env
+        echo "${{secrets.INSTAGRAM_SECRETS}}" >> .env
+    
+    - name: Run posting script
+      run: python insta_post.py
+
+    
+    - name: Commit and push changes
+      env:
+        # Use the built-in GitHub token
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "posted image to instagram $(date +'%Y-%m-%d')" || exit 0
+        git push

@@ -81,6 +81,47 @@ def generate_poem(input_list, length=5, flags=KEEP_CASE):
     except ValueError:
         return random.sample(output_list, 1)
     
+# Apply word sorting algorithm and then output a structured poem
+def generate_structured_poem(input_list: str, length, flags=KEEP_CASE):
+    nouns = []
+    verbs = []
+    adjectives = []
+    sentence_structures = [
+        # ["NOUN", "VERB", "ADJ", "NOUN"],
+        # ["ADJ", "NOUN", "VERB"],
+        ["NOUN", "VERB"]
+    ]
+
+    word_pools = {"NOUN": nouns, "VERB": verbs, "ADJ": adjectives}
+
+    for word in input_list:
+        if word.istitle():
+            nouns.append(word)
+        else:
+            if word.endswith("en") or word.endswith("t"):
+                verbs.append(word)
+            else:
+                adjectives.append(word)
+
+    stanza = []
+
+    for _ in range(length):
+        structure = random.choice(sentence_structures)
+        words = [random.choice(word_pools[pos]) for pos in structure]
+        
+        if flags & LOWERCASE:
+            words = [word.lower() for word in words]
+        elif flags & UPPERCASE:
+            words = [word.upper() for word in words]
+        elif flags & CAPITALIZE:
+            words = [word.capitalize() for word in words]
+
+        stanza.extend(words)
+        # stanza += " ".join(words) + " "
+    
+    return stanza
+
+
 
 
 if __name__ == "__main__":
@@ -94,7 +135,12 @@ if __name__ == "__main__":
     text = remove_short_words(text, maxlength=2)
     text = remove_prepositions(text)
     text = remove_duplicates(text)
+    text = remove_all_digits(text)
 
     # Generate a new random poem each time with specified length
-    poem = generate_poem(input_list=text, length=5, flags=KEEP_CASE)
+    poem = generate_poem(input_list=text, length=20, flags=LOWERCASE)
+    print(poem)
+
+    # Generate a new random strucutred poem each time with specified length
+    poem = generate_structured_poem(input_list=text, length=5, flags=KEEP_CASE)
     print(poem)
