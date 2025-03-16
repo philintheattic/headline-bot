@@ -1,36 +1,55 @@
-import instagrapi
-import os, sys
-from datetime import date
-from dotenv import load_dotenv
 import requests
-
-# Is there a better solution than hardcoding?
-output_path = f"ready2post/post-{date.today()}.png"
-
-# check if there exists a file to post for the day
-if not os.path.exists(output_path):
-    sys.exit("File not found! Nothing to post today.")
+from dotenv import load_dotenv
+import os
 
 # Load environment variables
 load_dotenv()
-ACCOUNT_NAME = os.getenv("ACCOUNT_NAME")
-ACCOUNT_PASSWORD = os.getenv("ACCOUNT_PASSWORD")
 
-# Proxy
-proxy = "http://194.163.183.242:3128"
+# tumblr api stuff
+API_KEY = os.getenv("API_KEY")
+BLOG_NAME = "doom-news.tumblr.com"
 
-### INSTAGRAM API STUFF ###
-client = instagrapi.Client()
+# instagram api stuff
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
+INSTAGRAM_ID = os.getenv("BUSINESS_ID")
 
-client.set_proxy(proxy)
+def get_latest_tumblr_image():
+    url = f"https://api.tumblr.com/v2/blog/{BLOG_NAME}/posts/photo?api_key={API_KEY}"
+    response = requests.get(url)
+    data = response.json()
 
-proxy_dict = {
-    "http": proxy,
-    "https": proxy
+    # Extract image URL from latest post
+    if "response" in data and "posts" in data["response"]:
+        latest_post = data["response"]["posts"][0]  # Get the most recent post
+        image_url = latest_post["photos"][0]["original_size"]["url"]
+        return image_url
+    return None
+
+
+IMAGE_URL = get_latest_tumblr_image()  # Image must be publicly accessible
+CAPTION = "we did it!"
+
+# Step 1: Upload the Image
+url = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ID}/media"
+
+if IMAGE_URL:
+    data = {
+        "image_url": IMAGE_URL,
+        "caption": CAPTION,
+        "access_token": ACCESS_TOKEN
+    }
+    response = requests.post(url, data=data)
+    media_id = response.json().get("id")
+    print("Media ID:", media_id)
+else:
+    print("No image found!")
+
+# Step 2: Publish the Image
+publish_url = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ID}/media_publish"
+publish_data = {
+    "creation_id": media_id,
+    "access_token": ACCESS_TOKEN
 }
+publish_response = requests.post(publish_url, data=publish_data)
 
-response = requests.get("https://httpbin.org/ip", proxies=proxy_dict)
-print(response.json())
-
-# client.login(ACCOUNT_NAME, ACCOUNT_PASSWORD)
-# client.photo_upload(output_path, f"doomnews vom {date.today()}")
+print(publish_response.json())  # Should return success message
