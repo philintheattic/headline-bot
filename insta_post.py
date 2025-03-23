@@ -1,6 +1,17 @@
 import requests
 from dotenv import load_dotenv
 import os
+from TextGen import *
+
+# Prepare a caption
+file = "headlines.txt"
+text = import_file_as_list(file)
+text = remove_all_symbols(text)
+text = remove_short_words(text, maxlength=2)
+text = remove_prepositions(text)
+text = remove_duplicates(text)
+text = remove_all_digits(text)
+poem = generate_poem(text, length=3, flags=LOWERCASE)
 
 # Load environment variables
 load_dotenv()
@@ -25,9 +36,8 @@ def get_latest_tumblr_image():
         return image_url
     return None
 
-
 IMAGE_URL = get_latest_tumblr_image()  # Image must be publicly accessible
-CAPTION = "we did it!"
+CAPTION = " ".join(poem)
 
 # Step 1: Upload the Image
 url = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ID}/media"
