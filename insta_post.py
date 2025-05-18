@@ -40,7 +40,7 @@ IMAGE_URL = get_latest_tumblr_image()  # Image must be publicly accessible
 CAPTION = " ".join(poem)
 
 # Step 1: Upload the Image
-url = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ID}/media"
+url = f"https://graph.facebook.com/v22.0/{INSTAGRAM_ID}/media"
 
 if IMAGE_URL:
     data = {
@@ -55,7 +55,7 @@ else:
     print("No image found!")
 
 # Step 2: Publish the Image
-publish_url = f"https://graph.facebook.com/v18.0/{INSTAGRAM_ID}/media_publish"
+publish_url = f"https://graph.facebook.com/v22.0/{INSTAGRAM_ID}/media_publish"
 publish_data = {
     "creation_id": media_id,
     "access_token": ACCESS_TOKEN
