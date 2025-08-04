@@ -1,4 +1,3 @@
-tagesschau in 100 Sekunden
 "Prometheus": Schiff der griechischen Marine in Hamburg
 CSD in Neubrandenburg: "Nie wieder still - Liebe ist alles"
 Manöver im Atlantik: "Berlin" läuft aus Wilhelmshaven aus
@@ -22,3 +21,4 @@ Blitzermarathon im August: Ab heute wird in BW wieder kontrolliert
 Alle fünf verschütteten Bergleute sind tot
 Prozessbeginn nach Anschlag auf die Crocus City Hall
 BW-Newsticker am Morgen: Blitzer-Woche - Polizei kontrolliert, Katastrophenschutz sucht Helfer, Wetter wird diese Woche wieder schöner
+Ausbildungsstart, neue Fußfessel-Technik, Borreliose
