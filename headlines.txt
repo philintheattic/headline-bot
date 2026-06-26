@@ -1,4 +1,3 @@
-tagesschau in 100 Sekunden
 BW-Newsticker am Morgen: Funkstörung bei der Deutschen Bahn: Weiter Verspätungen möglich, A8 wegen umgekipptem Tanklaster gesperrt, Hitzewelle bringt bis zu 38 Grad
 S-Bahn-Betrieb läuft in Berlin nach bundesweiter Störung wieder weitestgehend normal
 Frieder Kümmerer, SWR, zum Funkausfall bei der Deutschen Bahn
@@ -22,3 +21,4 @@ Baggern statt Büffeln: Wie Betriebe um fitte Azubis buhlen
 Jugendherberge Nehringen: Schlafen in Campingfässern
 Claudia Kleinert, HR, zur Hitzewelle und den Aussichten für die nächsten Tage
 Israel und Libanon schließen Rahmenabkommen
+tagesschau in 100 Sekunden
