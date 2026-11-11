@@ -10,7 +10,7 @@ on:
 
 jobs:
   generate-post:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     
     permissions:
       # Important: give the workflow permission to push changes
@@ -23,7 +23,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.9.0'
+        python-version: '3.9'
     
     - name: Install dependencies
       run: |
